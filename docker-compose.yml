@@ -14,6 +14,15 @@ services:
       - ollama-intel-gpu:/root/.ollama
     environment:
       - DISPLAY=${DISPLAY}
+      - ONEAPI_DEVICE_SELECTOR=gpu
+      - ZE_AFFINITY_MASK=0.0
+      - IPEX_XPU_BACKEND=gpu
+      - OCL_ICD_FILENAMES=/opt/intel/opencl/libintelocl.so
+      - SYCL_DEVICE_FILTER=opencl:gpu
+      - ZES_ENABLE_SYSMAN=1
+      - OLLAMA_INTEL_GPU=true
+      - DEVICE=Arc
+    shm_size: '16gb'
   ollama-webui:
     image: ghcr.io/open-webui/open-webui
     container_name: ollama-webui
